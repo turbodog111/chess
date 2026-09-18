@@ -347,8 +347,8 @@ a:hover { color: var(--crimson); }
 
 .diagram-inner {
   display: grid;
-  grid-template-columns: 1.15rem 1fr;
-  grid-template-rows: 1fr 1.15rem;
+  grid-template-columns: 1.15rem minmax(0, 1fr);
+  grid-template-rows: auto 1.15rem;
   column-gap: 0.85rem;
   row-gap: 0.7rem;
   padding: 0.75rem;
@@ -367,7 +367,7 @@ a:hover { color: var(--crimson); }
 .ranks {
   grid-column: 1;
   grid-row: 1;
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(8, minmax(0, 1fr));
   align-items: center;
   justify-items: center;
 }
@@ -384,10 +384,11 @@ a:hover { color: var(--crimson); }
   grid-column: 2;
   grid-row: 1;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   box-shadow:
     0 0 0 1px #2a1b10,
     0 0 0 9px #3c2618,
@@ -412,8 +413,7 @@ a:hover { color: var(--crimson); }
   position: relative;
   min-width: 0;
   min-height: 0;
-  display: grid;
-  place-items: center;
+  overflow: hidden;
 }
 
 .sq.l { background: var(--board-light); }
@@ -430,12 +430,14 @@ a:hover { color: var(--crimson); }
 }
 
 .sq img {
+  position: absolute;
+  inset: 5%;
   width: 90%;
   height: 90%;
   max-width: none;
   object-fit: contain;
-  position: relative;
   z-index: 1;
+  pointer-events: none;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.28));
 }
 
