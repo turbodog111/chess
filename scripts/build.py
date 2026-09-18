@@ -81,12 +81,10 @@ def render_board(board: chess.Board, last: chess.Move | None, caption: str, comp
     ranks = "".join(f"<span>{r}</span>" for r in range(8, 0, -1))
     files = "".join(f"<span>{f}</span>" for f in "abcdefgh")
     return f"""<figure class="diagram{compact_cls}">
-  <div class="board-frame">
-    <div class="board-with-coords">
-      <div class="ranks" aria-hidden="true">{ranks}</div>
-      <div class="board" role="img" aria-label="{label}">{"".join(squares)}</div>
-      <div class="files" aria-hidden="true">{files}</div>
-    </div>
+  <div class="diagram-inner">
+    <div class="ranks" aria-hidden="true">{ranks}</div>
+    <div class="board" role="img" aria-label="{label}">{"".join(squares)}</div>
+    <div class="files" aria-hidden="true">{files}</div>
   </div>
   <figcaption><strong>{html.escape(caption)}</strong> · {turn}</figcaption>
 </figure>"""
@@ -180,7 +178,7 @@ def page_shell(title: str, current: str, body: str, description: str) -> str:
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>A static HTML and CSS reference to the Queen's Gambit family. Last moves are marked on each diagram.</p>
+      <p>A reference to the Queen's Gambit family. Last moves are marked on each diagram.</p>
       <p>Piece drawings by Colin M.L. Burnett, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</p>
     </div>
   </footer>
@@ -640,8 +638,6 @@ def index_page() -> str:
           <p class="lede">White offers the c-pawn on move two. Black can take it, decline it with ...e6, or support the centre with ...c6. This site is a map of the main continuations from that fork.</p>
           <div class="meta-row">
             <span class="badge">1. d4 d5 2. c4</span>
-            <span class="badge">HTML + CSS</span>
-            <span class="badge">Last move marked</span>
           </div>
         </div>
         {render_board(start_board, start_last, "The Queen's Gambit, after 2.c4")}
